@@ -59,12 +59,15 @@ fi
 
 # Count the total number of tests and the number of passed tests
 total_tests=$(grep -oP "(?<=Tests run: )\d+" test_results.txt)
+
 failed_test=$(grep -oP "(?<=Failures: )\d+" test_results.txt)
+passed=$((total_tests-failed_test))
+
 total_tests=$((total_tests))
 failed_test=$((failed_test))
-passed=$((total_tests-failed_test))
-grades=$((passed/total_tests*100))
-echo "Total Grades: $grades"
+
+echo "Tests Passed: ${passed}/${total_tests}"
+
 
 # Clean up
 rm test_results.txt
